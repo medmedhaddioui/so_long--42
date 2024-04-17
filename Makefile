@@ -1,20 +1,22 @@
 NAME = so_long
 
-SRC = so_long.c
+SRC = so_long.c parsing.c so_long_utils.c window.c flood_fill.c
 
 OBJ = $(SRC:.c=.o)
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -Imlx
 
-LDFLAGS = -Lminilibx-linux -lmlx_Linux -lX11 -lXext
+LDFLAGS = -lmlx -framework OpenGL -framework AppKit
+
+LIBFT_A = libft/libft.a
 
 all : $(NAME)
 
 $(NAME): $(SRC)
-	cd libft && $(MAKE)
-	$(CC) $(CFLAGS) $(SRC) $(LIBFT_A) -o $(NAME) $(LDFLAGS)
+	$(MAKE) -C ./libft
+	$(CC) $(CFLAGS) $(SRC)  $(LIBFT_A) $(LDFLAGS) -o $(NAME) 
 
 clean:
 	cd libft && rm -rf *.o
