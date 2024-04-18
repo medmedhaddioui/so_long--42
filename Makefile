@@ -1,6 +1,6 @@
 NAME = so_long
 
-SRC = so_long.c parsing.c so_long_utils.c window.c flood_fill.c
+SRC = so_long.c parsing.c so_long_utils.c window.c parsing2.c
 
 OBJ = $(SRC:.c=.o)
 

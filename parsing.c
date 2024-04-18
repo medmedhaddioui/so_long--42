@@ -6,7 +6,7 @@
 /*   By: mel-hadd <mel-hadd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 19:51:52 by mel-hadd          #+#    #+#             */
-/*   Updated: 2024/04/17 15:26:04 by mel-hadd         ###   ########.fr       */
+/*   Updated: 2024/04/18 11:55:51 by mel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,13 +102,11 @@ void	surrounded_map_check(t_data *o)
 
 void	parsing(t_data *o)
 {
-	char **map_fill;
-
-	map_fill = o->map;
 	characters_map_check(o);
 	dup_characters_map_check(o);
 	rectangular_map_check(o);
 	surrounded_map_check(o);
 	get_index_player(o);
-	flood_fill(map_fill, o->x, o->y);
+	map_copy(o);
+	check_valid_path(o);
 }

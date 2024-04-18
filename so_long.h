@@ -6,7 +6,7 @@
 /*   By: mel-hadd <mel-hadd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 21:15:45 by mel-hadd          #+#    #+#             */
-/*   Updated: 2024/04/17 15:23:36 by mel-hadd         ###   ########.fr       */
+/*   Updated: 2024/04/18 11:52:31 by mel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct m_data
     char  *line[100];
     char *m;
     char **map;
+    char **map_fill;
     int nbstr;
     size_t width;
     int height;
@@ -41,11 +42,11 @@ void rectangular_map_check(t_data *o);
 void parsing(t_data *o);
 void	ft_error(char *s);
 void mlx_window (t_data *o);
-void	flood_fill(char **map_fill, int x, int y);
-
-
-
 void	get_index_player(t_data *o);
-void print_map (t_data *o);
+void	flood_fill(t_data *o, int x, int y);
+void	check_valid_path(t_data *o);
+void map_copy(t_data *o);
+char	* ft_alloc_str (t_data *o, int i);
+void print_map (char **s);
 
 #endif

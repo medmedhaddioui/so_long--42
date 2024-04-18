@@ -6,7 +6,7 @@
 /*   By: mel-hadd <mel-hadd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 14:17:52 by mel-hadd          #+#    #+#             */
-/*   Updated: 2024/04/17 15:35:43 by mel-hadd         ###   ########.fr       */
+/*   Updated: 2024/04/18 11:55:00 by mel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,58 @@ void	get_index_player(t_data *o)
 			o->y++;
 		}
 		else if (o->map[o->y][o->x] == 'P')
-			break;
+			break ;
 		else
 			o->x++;
 	}
 }
-void print_map (t_data *o)
+void	map_copy(t_data *o)
 {
-	int i;
+	int	i;
+	int	lines;
+
 	i = 0;
-	while (o->map[i])
+	lines = 0;
+	while (o->map[++lines])
+		;
+	o->map_fill = malloc(sizeof(char *) * (lines + 1));
+	if (!o->map_fill)
+		return ;
+	while (i < lines)
 	{
-		printf("%s\n",o->map[i]);
+		o->map_fill[i] = ft_alloc_str (o, i);
+		i++;
+	}
+	o->map_fill[lines] = NULL;
+}
+char	* ft_alloc_str (t_data *o, int i)
+{
+	char	*str;
+	int		j;
+	int		len;
+
+	j = 0;
+	len = ft_strlen(o->map[0]);
+	str = malloc(sizeof(char) + len + 1);
+	if (!str)
+		return (NULL);
+	while (j < len)
+	{
+		str[j] = o->map[i][j];
+		j++;
+	}
+	str[j] = '\0';
+	return (str);
+}
+
+void	print_map(char **s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		printf("%s\n",s[i]);
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mel-hadd <mel-hadd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 21:14:15 by mel-hadd          #+#    #+#             */
-/*   Updated: 2024/04/17 16:15:41 by mel-hadd         ###   ########.fr       */
+/*   Updated: 2024/04/18 11:25:52 by mel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,7 @@ int	main(int ac, char **av)
 	if (o.fd == -1)
 		exit(1);
 	read_from_file(&o);
-	printf("Before\n\n");
-	print_map(&o);
-	// mlx_window(&o);
 	parsing(&o);
+	// mlx_window(&o);
 	return (0);
 }
