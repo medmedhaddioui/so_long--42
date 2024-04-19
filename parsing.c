@@ -6,7 +6,7 @@
 /*   By: mel-hadd <mel-hadd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 19:51:52 by mel-hadd          #+#    #+#             */
-/*   Updated: 2024/04/18 11:55:51 by mel-hadd         ###   ########.fr       */
+/*   Updated: 2024/04/18 13:38:21 by mel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	parsing(t_data *o)
 	dup_characters_map_check(o);
 	rectangular_map_check(o);
 	surrounded_map_check(o);
-	get_index_player(o);
+	get_player_index(o);
 	map_copy(o);
 	check_valid_path(o);
 }

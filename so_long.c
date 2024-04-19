@@ -6,40 +6,16 @@
 /*   By: mel-hadd <mel-hadd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 21:14:15 by mel-hadd          #+#    #+#             */
-/*   Updated: 2024/04/18 11:25:52 by mel-hadd         ###   ########.fr       */
+/*   Updated: 2024/04/19 11:14:08 by mel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	read_from_file(t_data *o)
-{
-	o->i = 0;
-	o->nbstr = 0;
-	o->m = get_next_line(o->fd);
-	if (!o->m)
-		ft_error("Map not valid\n");
-	while (1)
-	{
-		o->line[o->i] = get_next_line(o->fd);
-		if (!o->line[o->i])
-			break ;
-		o->m = ft_strjoin_2(o->m, o->line[o->i]);
-		free(o->line[o->i]);
-		o->i++;
-	}
-	free(o->line[o->i]);
-	o->map = ft_split(o->m, '\n');
-	while (o->map[o->nbstr])
-		o->nbstr++;
-	o->nbstr--;
-	if (o->nbstr != o->i)
-		ft_error("Map not valid\n");
-}
-
 int	main(int ac, char **av)
 {
 	t_data	o;
+	t_var imgs;
 
 	if (ac != 2)
 		ft_error("Map file not exist\n");
@@ -51,6 +27,6 @@ int	main(int ac, char **av)
 		exit(1);
 	read_from_file(&o);
 	parsing(&o);
-	// mlx_window(&o);
+	create_window(&imgs, &o);
 	return (0);
 }
