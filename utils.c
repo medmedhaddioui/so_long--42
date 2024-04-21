@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long_utils.c                                    :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-hadd <mel-hadd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 14:17:52 by mel-hadd          #+#    #+#             */
-/*   Updated: 2024/04/18 13:57:00 by mel-hadd         ###   ########.fr       */
+/*   Updated: 2024/04/20 18:27:42 by mel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	ft_error(char *s)
 {
 	ft_putstr_fd(s, 2);
-	system("leaks so_long");
 	exit(1);
 }
 void	read_from_file(t_data *o)
@@ -43,45 +42,33 @@ void	read_from_file(t_data *o)
 		ft_error("Map not valid\n");
 }
 
-void	map_copy(t_data *o)
+void get_player_exit_xy (t_var *imgs, t_pos *v)
 {
-	int	i;
-	int	lines;
-
-	i = 0;
-	lines = 0;
-	while (o->map[++lines])
-		;
-	o->map_fill = malloc(sizeof(char *) * (lines + 1));
-	if (!o->map_fill)
-		return ;
-	while (i < lines)
-	{
-		o->map_fill[i] = ft_alloc_str(o, i);
-		i++;
-	}
-	o->map_fill[lines] = NULL;
+	imgs->coin_nb = 0;
+    int i = 0;
+    int j;
+    while (imgs->map2[i])
+    {
+        j = 0;
+        while (imgs->map2[i][j])
+        {
+			if (imgs->map2[i][j] == 'C')
+				imgs->coin_nb++;
+            if (imgs->map2[i][j] == 'P')
+            {
+                v->x_player = j;
+                v->y_player = i;
+            }
+            else if (imgs->map2[i][j] == 'E')
+            {
+                 v->x_exit = j;
+                v->y_exit = i;
+            }
+            j++;
+        }
+        i++;
+    }
 }
-char	*ft_alloc_str(t_data *o, int i)
-{
-	char	*str;
-	int		j;
-	int		len;
-
-	j = 0;
-	len = ft_strlen(o->map[0]);
-	str = malloc(sizeof(char) + len + 1);
-	if (!str)
-		return (NULL);
-	while (j < len)
-	{
-		str[j] = o->map[i][j];
-		j++;
-	}
-	str[j] = '\0';
-	return (str);
-}
-
 void	print_map(char **s)
 {
 	int	i;

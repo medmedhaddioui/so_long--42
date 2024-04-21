@@ -1,12 +1,12 @@
 NAME = so_long
 
-SRC = so_long.c parsing.c so_long_utils.c window.c parsing2.c
+SRC = so_long.c parsing.c utils.c parsing2.c  window.c movements.c
 
 OBJ = $(SRC:.c=.o)
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -Imlx
+CFLAGS = -Wall -Wextra -Werror -Imlx -g3 -fsanitize=address
 
 LDFLAGS = -lmlx -framework OpenGL -framework AppKit
 

@@ -6,7 +6,7 @@
 /*   By: mel-hadd <mel-hadd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 13:52:02 by mel-hadd          #+#    #+#             */
-/*   Updated: 2024/04/18 13:47:56 by mel-hadd         ###   ########.fr       */
+/*   Updated: 2024/04/20 23:08:40 by mel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	flood_fill(t_data *o, int x, int y)
 	width = ft_strlen(o->map_fill[0]) - 1;
 	height = o->nbstr;
 	if (x < 0 || x > width || y < 0 || y > height || o->map_fill[y][x] == '1'
-		|| o->map_fill[y][x] == 'V')
+		|| o->map_fill[y][x] == 'V' || o->map_fill[y][x] == 'E')
 		return ;
 	else
 		o->map_fill[y][x] = 'V';
@@ -29,45 +29,86 @@ void	flood_fill(t_data *o, int x, int y)
 	flood_fill(o, x - 1, y);
 	flood_fill(o, x + 1, y);
 }
-void	get_player_index(t_data *o)
+void	get_xy(t_data *o, t_pos *v)
 {
-	o->x = 0;
-	o->y = 0;
-	while (o->map[o->y])
-	{
-		if (o->map[o->y][o->x] == '\0')
-		{
-			o->x = 0;
-			o->y++;
-		}
-		else if (o->map[o->y][o->x] == 'P')
-			break ;
-		else
-			o->x++;
-	}
-}
-void	get_exit_index(t_data *o)
-{
-	o->x = 0;
-	o->y = 0;
-	while (o->map[o->y])
-	{
-		if (o->map[o->y][o->x] == '\0')
-		{
-			o->x = 0;
-			o->y++;
-		}
-		else if (o->map[o->y][o->x] == 'E')
-			break ;
-		else
-			o->x++;
-	}
-}
+	int	i;
+	int	j;
 
-void	check_valid_path(t_data *o)
+	i = 0;
+	while (o->map[i])
+	{
+		j = 0;
+		while (o->map[i][j])
+		{
+			if (o->map[i][j] == 'P')
+			{
+				v->x_player = j;
+				v->y_player = i;
+			}
+			else if (o->map[i][j] == 'E')
+			{
+				v->x_exit = j;
+				v->y_exit = i;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+void	check_valid_path(t_data *o, t_pos *v)
 {
-	flood_fill(o, o->x, o->y);
-	get_exit_index(o);
-	if (o->map_fill[o->y][o->x] != 'V')
+	flood_fill(o, v->x_player, v->y_player);
+	if (o->map_fill[v->y_exit - 1][v->x_exit] != 'V' && o->map_fill[v->y_exit
+		+ 1][v->x_exit] != 'V' && o->map_fill[v->y_exit][v->x_exit + 1] != 'V'
+		&& o->map_fill[v->y_exit][v->x_exit - 1] != 'V')
 		ft_error("Error Path not valid");
+	while (o->map_fill[o->y])
+	{
+		o->x = 0;
+		while (o->map_fill[o->y][o->x])
+		{
+			if (o->map_fill[o->y][o->x] == 'C')
+				ft_error("Error coin cant be collected !\n");
+			o->x++;
+		}
+		o->y++;
+	}
+}
+void	map_copy(t_data *o)
+{
+	int	i;
+	int	lines;
+
+	i = 0;
+	lines = 0;
+	while (o->map[++lines])
+		;
+	o->map_fill = malloc(sizeof(char *) * (lines + 1));
+	if (!o->map_fill)
+		return ;
+	while (i < lines)
+	{
+		o->map_fill[i] = ft_alloc_str(o, i);
+		i++;
+	}
+	o->map_fill[lines] = NULL;
+}
+char	*ft_alloc_str(t_data *o, int i)
+{
+	char	*str;
+	int		j;
+	int		len;
+
+	j = 0;
+	len = ft_strlen(o->map[0]);
+	str = malloc(sizeof(char) + len + 1);
+	if (!str)
+		return (NULL);
+	while (j < len)
+	{
+		str[j] = o->map[i][j];
+		j++;
+	}
+	str[j] = '\0';
+	return (str);
 }

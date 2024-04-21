@@ -6,7 +6,7 @@
 /*   By: mel-hadd <mel-hadd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 19:51:52 by mel-hadd          #+#    #+#             */
-/*   Updated: 2024/04/18 13:38:21 by mel-hadd         ###   ########.fr       */
+/*   Updated: 2024/04/20 16:30:14 by mel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,7 @@ void	surrounded_map_check(t_data *o)
 	o->height = 1;
 	while (o->height <= o->nbstr - 1)
 	{
-		if (o->map[o->height][0] != '1' || o->map[o->height][o->width
-			- 1] != '1')
+		if (o->map[o->height][0] != '1' || o->map[o->height][o->width - 1] != '1')
 			ft_error("Error Map not closed\n");
 		o->height++;
 	}
@@ -102,11 +101,12 @@ void	surrounded_map_check(t_data *o)
 
 void	parsing(t_data *o)
 {
+	t_pos v;
 	characters_map_check(o);
 	dup_characters_map_check(o);
 	rectangular_map_check(o);
 	surrounded_map_check(o);
-	get_player_index(o);
+	get_xy(o, &v);
 	map_copy(o);
-	check_valid_path(o);
+	check_valid_path(o, &v);
 }
