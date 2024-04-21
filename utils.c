@@ -6,7 +6,7 @@
 /*   By: mel-hadd <mel-hadd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 14:17:52 by mel-hadd          #+#    #+#             */
-/*   Updated: 2024/04/20 18:27:42 by mel-hadd         ###   ########.fr       */
+/*   Updated: 2024/04/21 13:26:31 by mel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,21 @@ void	ft_error(char *s)
 }
 void	read_from_file(t_data *o)
 {
-	o->i = 0;
+	o->i =0;
 	o->nbstr = 0;
 	o->m = get_next_line(o->fd);
 	if (!o->m)
 		ft_error("Map not valid\n");
 	while (1)
 	{
-		o->line[o->i] = get_next_line(o->fd);
-		if (!o->line[o->i])
+		o->line = get_next_line(o->fd);
+		if (!o->line)
 			break ;
-		o->m = ft_strjoin_2(o->m, o->line[o->i]);
-		free(o->line[o->i]);
+		o->m = ft_strjoin_2(o->m, o->line);
+		free(o->line);
 		o->i++;
 	}
-	free(o->line[o->i]);
+	free(o->line);
 	o->map = ft_split(o->m, '\n');
 	while (o->map[o->nbstr])
 		o->nbstr++;

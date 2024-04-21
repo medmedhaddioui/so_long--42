@@ -6,7 +6,7 @@
 /*   By: mel-hadd <mel-hadd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 21:15:45 by mel-hadd          #+#    #+#             */
-/*   Updated: 2024/04/20 21:32:26 by mel-hadd         ###   ########.fr       */
+/*   Updated: 2024/04/21 13:25:49 by mel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 typedef struct m_data
 {
     int fd;
-    char  *line[100];
+    char  *line;
     char *m;
     char **map;
     char **map_fill;
