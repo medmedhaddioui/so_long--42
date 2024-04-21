@@ -6,7 +6,7 @@
 /*   By: mel-hadd <mel-hadd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 19:51:52 by mel-hadd          #+#    #+#             */
-/*   Updated: 2024/04/20 16:30:14 by mel-hadd         ###   ########.fr       */
+/*   Updated: 2024/04/21 15:47:34 by mel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	dup_characters_map_check(t_data *o)
 		o->i++;
 	}
 	if (exit_count != 1 || player_count != 1)
-		ft_error("Error map must contain 1 exit, and 1 starting position\n");
+		ft_error("Error map must contain 1 exit, and 1 starting position\n" , o->map);
 }
 
 void	characters_map_check(t_data *o)
@@ -54,7 +54,7 @@ void	characters_map_check(t_data *o)
 			if (o->map[o->i][o->j] != '1' && o->map[o->i][o->j] != '0'
 				&& o->map[o->i][o->j] != 'E' && o->map[o->i][o->j] != 'P'
 				&& o->map[o->i][o->j] != 'C')
-				ft_error("Error character not valid\n");
+				ft_error("Error character not valid\n", o->map);
 			if (o->map[o->i][o->j] == '1')
 				wall = 1;
 			else if (o->map[o->i][o->j] == 'C')
@@ -64,7 +64,7 @@ void	characters_map_check(t_data *o)
 		o->i++;
 	}
 	if (wall != 1 || key != 1)
-		ft_error("Error components missing\n");
+		ft_error("Error components missing\n", o->map);
 }
 
 void	rectangular_map_check(t_data *o)
@@ -78,7 +78,7 @@ void	rectangular_map_check(t_data *o)
 		o->i++;
 	}
 	if (o->width != ft_strlen(o->map[o->i]))
-		ft_error("Error Map not Rectangular\n");
+		ft_error("Error Map not Rectangular\n", o->map);
 }
 
 void	surrounded_map_check(t_data *o)
@@ -87,14 +87,14 @@ void	surrounded_map_check(t_data *o)
 	while (o->map[0][o->i] && o->map[o->nbstr][o->i])
 	{
 		if (o->map[0][o->i] != '1' || o->map[o->nbstr][o->i] != '1')
-			ft_error("Error Map not closed\n");
+			ft_error("Error Map not closed\n", o->map);
 		o->i++;
 	}
 	o->height = 1;
 	while (o->height <= o->nbstr - 1)
 	{
 		if (o->map[o->height][0] != '1' || o->map[o->height][o->width - 1] != '1')
-			ft_error("Error Map not closed\n");
+			ft_error("Error Map not closed\n", o->map);
 		o->height++;
 	}
 }

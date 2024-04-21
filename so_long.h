@@ -6,7 +6,7 @@
 /*   By: mel-hadd <mel-hadd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 21:15:45 by mel-hadd          #+#    #+#             */
-/*   Updated: 2024/04/21 13:25:49 by mel-hadd         ###   ########.fr       */
+/*   Updated: 2024/04/21 15:49:11 by mel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <string.h>
-#include <mlx.h>
+// #include <mlx.h>
 
 #define W 13
 #define S 1
@@ -67,7 +67,7 @@ typedef struct	s_var
 
 void rectangular_map_check(t_data *o);
 void parsing(t_data *o);
-void	ft_error(char *s);
+void	ft_error(char *s, char **map);
 void	flood_fill(t_data *o, int x, int y);
 void	check_valid_path(t_data *o ,t_pos *v);
 void map_copy(t_data *o);
@@ -83,8 +83,9 @@ void	up_key(t_var *imgs , t_pos *v);
 void	down_key(t_var *imgs , t_pos *v);
 void get_player_exit_xy (t_var *imgs, t_pos *v);
 void get_xy (t_data *o, t_pos *v);
+void ft_exit(char *s);
 
 
-
+void free_map(char **s);
 void print_map (char **s);
 #endif
