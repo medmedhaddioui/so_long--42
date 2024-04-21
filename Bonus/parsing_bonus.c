@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parsing_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-hadd <mel-hadd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 19:51:52 by mel-hadd          #+#    #+#             */
-/*   Updated: 2024/04/21 15:47:34 by mel-hadd         ###   ########.fr       */
+/*   Updated: 2024/04/21 17:51:42 by mel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	dup_characters_map_check(t_data *o)
 {
@@ -35,7 +35,7 @@ void	dup_characters_map_check(t_data *o)
 		o->i++;
 	}
 	if (exit_count != 1 || player_count != 1)
-		ft_error("Error map must contain 1 exit, and 1 starting position\n" , o->map);
+		ft_error("Error map must contain 1 exit, and 1 starting position\n");
 }
 
 void	characters_map_check(t_data *o)
@@ -54,7 +54,7 @@ void	characters_map_check(t_data *o)
 			if (o->map[o->i][o->j] != '1' && o->map[o->i][o->j] != '0'
 				&& o->map[o->i][o->j] != 'E' && o->map[o->i][o->j] != 'P'
 				&& o->map[o->i][o->j] != 'C')
-				ft_error("Error character not valid\n", o->map);
+				ft_error("Error character not valid\n");
 			if (o->map[o->i][o->j] == '1')
 				wall = 1;
 			else if (o->map[o->i][o->j] == 'C')
@@ -64,7 +64,7 @@ void	characters_map_check(t_data *o)
 		o->i++;
 	}
 	if (wall != 1 || key != 1)
-		ft_error("Error components missing\n", o->map);
+		ft_error("Error components missing\n");
 }
 
 void	rectangular_map_check(t_data *o)
@@ -78,7 +78,7 @@ void	rectangular_map_check(t_data *o)
 		o->i++;
 	}
 	if (o->width != ft_strlen(o->map[o->i]))
-		ft_error("Error Map not Rectangular\n", o->map);
+		ft_error("Error Map not Rectangular\n");
 }
 
 void	surrounded_map_check(t_data *o)
@@ -87,14 +87,14 @@ void	surrounded_map_check(t_data *o)
 	while (o->map[0][o->i] && o->map[o->nbstr][o->i])
 	{
 		if (o->map[0][o->i] != '1' || o->map[o->nbstr][o->i] != '1')
-			ft_error("Error Map not closed\n", o->map);
+			ft_error("Error Map not closed\n");
 		o->i++;
 	}
 	o->height = 1;
 	while (o->height <= o->nbstr - 1)
 	{
 		if (o->map[o->height][0] != '1' || o->map[o->height][o->width - 1] != '1')
-			ft_error("Error Map not closed\n", o->map);
+			ft_error("Error Map not closed\n");
 		o->height++;
 	}
 }

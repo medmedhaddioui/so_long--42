@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-hadd <mel-hadd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/13 21:14:15 by mel-hadd          #+#    #+#             */
-/*   Updated: 2024/04/21 15:44:50 by mel-hadd         ###   ########.fr       */
+/*   Created: 2023/11/24 18:19:34 by mel-hadd          #+#    #+#             */
+/*   Updated: 2024/04/21 21:24:05 by mel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "ft_printf.h"
 
-int	main(int ac, char **av)
-{ 
-	t_data	o;
+int	ft_putnbr(int nb, int base)
+{
+	int	count;
 
-	if (ac != 2)
-		ft_exit("Map file not exist\n");
-	o.len = ft_strlen(av[1]) - 4;
-	if (strncmp(&av[1][o.len],".ber",4))
-		ft_exit("wrong file\n");
-	o.fd = open(av[1], O_RDONLY, 0666);
-	if (o.fd == -1)
-		return 1;
-	read_from_file(&o);
-	parsing(&o);
-	// create_window(&o);
-	free_map(o.map);
-	return (0);
+	count = 0;
+	if (nb == -2147483648)
+		return (write(1, "-2147483648", 11));
+	if (nb > 9)
+		count += ft_putnbr((nb / base), base);
+	if (nb < 0)
+	{
+		nb *= -1;
+		count += ft_putchar('-', 1);
+		count += ft_putnbr(nb, base);
+	}
+	else
+		count += ft_putchar(nb % base + '0', 1);
+	return (count);
 }

@@ -6,7 +6,7 @@
 /*   By: mel-hadd <mel-hadd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 13:52:02 by mel-hadd          #+#    #+#             */
-/*   Updated: 2024/04/21 15:56:16 by mel-hadd         ###   ########.fr       */
+/*   Updated: 2024/04/20 23:08:40 by mel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,26 +61,18 @@ void	check_valid_path(t_data *o, t_pos *v)
 	if (o->map_fill[v->y_exit - 1][v->x_exit] != 'V' && o->map_fill[v->y_exit
 		+ 1][v->x_exit] != 'V' && o->map_fill[v->y_exit][v->x_exit + 1] != 'V'
 		&& o->map_fill[v->y_exit][v->x_exit - 1] != 'V')
-	{
-		free_map(o->map_fill);
-		ft_error("Error Path not valid", o->map);
-	}
-	o->y = 0;
+		ft_error("Error Path not valid");
 	while (o->map_fill[o->y])
 	{
 		o->x = 0;
 		while (o->map_fill[o->y][o->x])
 		{
 			if (o->map_fill[o->y][o->x] == 'C')
-			{
-				free_map(o->map_fill);
-				ft_error("Error coin cant be collected !\n", o->map);
-			}
+				ft_error("Error coin cant be collected !\n");
 			o->x++;
 		}
 		o->y++;
 	}
-	free_map(o->map_fill);
 }
 void	map_copy(t_data *o)
 {
@@ -97,29 +89,26 @@ void	map_copy(t_data *o)
 	while (i < lines)
 	{
 		o->map_fill[i] = ft_alloc_str(o, i);
-		if (!o->map_fill[i])
-			free_map(o->map_fill);
 		i++;
 	}
 	o->map_fill[lines] = NULL;
 }
-char    *ft_alloc_str(t_data *o, int i)
+char	*ft_alloc_str(t_data *o, int i)
 {
-    char    *str;
-    int        j;
-    int        len;
+	char	*str;
+	int		j;
+	int		len;
 
-    j = 0;
-    len = ft_strlen(o->map[0]);
-    str = malloc(sizeof(char) * (len + 1));
-    if (!str)
-        return (NULL);
-    while (j < len)
-    {
-        str[j] = o->map[i][j];
-        j++;
-    }
-    str[j] = '\0';
-    return (str);
+	j = 0;
+	len = ft_strlen(o->map[0]);
+	str = malloc(sizeof(char) + len + 1);
+	if (!str)
+		return (NULL);
+	while (j < len)
+	{
+		str[j] = o->map[i][j];
+		j++;
+	}
+	str[j] = '\0';
+	return (str);
 }
-

@@ -6,7 +6,7 @@
 /*   By: mel-hadd <mel-hadd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 12:52:43 by mel-hadd          #+#    #+#             */
-/*   Updated: 2024/03/10 18:19:20 by mel-hadd         ###   ########.fr       */
+/*   Updated: 2024/04/21 21:20:42 by mel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <limits.h>
 # include <stdio.h>
 # include "get_next_line.h"
+#include "ft_printf.h"
 
 typedef struct s_list
 {
