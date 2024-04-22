@@ -6,20 +6,20 @@
 /*   By: mel-hadd <mel-hadd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 12:52:43 by mel-hadd          #+#    #+#             */
-/*   Updated: 2024/04/21 21:20:42 by mel-hadd         ###   ########.fr       */
+/*   Updated: 2024/04/22 14:48:32 by mel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include <stdlib.h>
-# include <unistd.h>
+# include "ft_printf.h"
+# include "get_next_line.h"
 # include <fcntl.h>
 # include <limits.h>
 # include <stdio.h>
-# include "get_next_line.h"
-#include "ft_printf.h"
+# include <stdlib.h>
+# include <unistd.h>
 
 typedef struct s_list
 {

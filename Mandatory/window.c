@@ -6,7 +6,7 @@
 /*   By: mel-hadd <mel-hadd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 13:15:44 by mel-hadd          #+#    #+#             */
-/*   Updated: 2024/04/21 21:28:10 by mel-hadd         ###   ########.fr       */
+/*   Updated: 2024/04/22 14:47:52 by mel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,17 @@ void	put_image(t_var *imgs, int y, int x, char *s)
 {
 	x *= 50;
 	y *= 50;
-	imgs->relative_path = s;
-	imgs->img = mlx_xpm_file_to_image(imgs->mlx, imgs->relative_path,
-			&imgs->img_width, &imgs->img_height);
+	imgs->path = s;
+	imgs->img = mlx_xpm_file_to_image(imgs->mlx, imgs->path, &imgs->img_width,
+			&imgs->img_height);
+	if (!imgs->img)
+	{
+		mlx_destroy_image(imgs->mlx, imgs->mlx_win);
+		exit(1);
+	}
 	mlx_put_image_to_window(imgs->mlx, imgs->mlx_win, imgs->img, x, y);
 }
+
 void	find_right_image(t_var *imgs, t_data *o)
 {
 	o->y = 0;
@@ -47,9 +53,10 @@ void	find_right_image(t_var *imgs, t_data *o)
 
 int	key_hook(int key_hook, t_var *imgs)
 {
-	t_pos v;
+	t_pos	v;
+
 	if (key_hook == D || key_hook == A || key_hook == W || key_hook == S)
-		ft_printf("%d\n",imgs->count++);
+		ft_printf("%d\n", imgs->count++);
 	if (key_hook == D)
 		right_key(imgs, &v);
 	if (key_hook == A)
@@ -58,13 +65,15 @@ int	key_hook(int key_hook, t_var *imgs)
 		up_key(imgs, &v);
 	if (key_hook == S)
 		down_key(imgs, &v);
-	else if(key_hook == ESC)
+	else if (key_hook == ESC)
 		exit(1);
 	return (0);
 }
+
 void	graphical_map(t_data *o)
 {
-	t_var imgs;
+	t_var	imgs;
+
 	imgs.map2 = o->map;
 	imgs.count = 1;
 	o->height = o->nbstr + 1;
@@ -72,7 +81,13 @@ void	graphical_map(t_data *o)
 	o->height *= 50;
 	o->width *= 50;
 	imgs.mlx = mlx_init();
+	if (!imgs.mlx)
+		ft_error("Error\n", o->map);
 	imgs.mlx_win = mlx_new_window(imgs.mlx, o->width, o->height, "So_long");
+	if (!imgs.mlx_win)
+	{
+		ft_error("Error\n", o->map);
+	}
 	find_right_image(&imgs, o);
 	mlx_key_hook(imgs.mlx_win, key_hook, &imgs);
 	mlx_loop(imgs.mlx);
