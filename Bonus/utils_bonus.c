@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils._bonus.c                                     :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-hadd <mel-hadd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 14:17:52 by mel-hadd          #+#    #+#             */
-/*   Updated: 2024/04/22 15:09:42 by mel-hadd         ###   ########.fr       */
+/*   Updated: 2024/04/22 22:06:55 by mel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	read_from_file(t_data *o)
 	o->nbstr = 0;
 	o->m = get_next_line(o->fd);
 	if (!o->m)
-		ft_exit("Map not valid\n");
+		ft_exit("Error Map not valid\n");
 	while (1)
 	{
 		o->line = get_next_line(o->fd);
@@ -48,7 +48,7 @@ void	read_from_file(t_data *o)
 		o->nbstr++;
 	o->nbstr--;
 	if (o->nbstr != o->i)
-		ft_error("Map not valid\n", o->map);
+		ft_error("Error Map not valid\n", o->map);
 }
 
 void	get_player_exit_xy(t_var *imgs, t_pos *v)

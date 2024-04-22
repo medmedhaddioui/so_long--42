@@ -6,7 +6,7 @@
 /*   By: mel-hadd <mel-hadd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 13:52:02 by mel-hadd          #+#    #+#             */
-/*   Updated: 2024/04/22 15:07:28 by mel-hadd         ###   ########.fr       */
+/*   Updated: 2024/04/22 22:03:53 by mel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	check_valid_path(t_data *o, t_pos *v)
 		&& o->map_fill[v->y_exit][v->x_exit - 1] != 'V')
 	{
 		free_map(o->map_fill);
-		ft_error("Error Path not valid", o->map);
+		ft_error("Error Path not valid\n", o->map);
 	}
 	o->y = 0;
 	while (o->map_fill[o->y])

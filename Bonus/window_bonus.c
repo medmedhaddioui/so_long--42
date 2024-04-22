@@ -6,7 +6,7 @@
 /*   By: mel-hadd <mel-hadd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 13:15:44 by mel-hadd          #+#    #+#             */
-/*   Updated: 2024/04/22 14:47:12 by mel-hadd         ###   ########.fr       */
+/*   Updated: 2024/04/22 22:06:59 by mel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	put_image(t_var *imgs, int y, int x, char *s)
 			&imgs->img_height);
 	if (!imgs->img)
 	{
-		mlx_destroy_image(imgs->mlx, imgs->mlx_win);
-		exit(1);
+		mlx_destroy_window(imgs->mlx, imgs->mlx_win);
+		ft_error("Error\n",imgs->map2);
 	}
 	mlx_put_image_to_window(imgs->mlx, imgs->mlx_win, imgs->img, x, y);
 }
@@ -66,7 +66,10 @@ int	key_hook(int key_hook, t_var *imgs)
 	if (key_hook == S)
 		down_key(imgs, &v);
 	else if (key_hook == ESC)
+	{
+		free_map(imgs->map2);
 		exit(1);
+	}
 	return (0);
 }
 
@@ -83,9 +86,12 @@ void	graphical_map(t_data *o)
 	imgs.mlx = mlx_init();
 	if (!imgs.mlx)
 		ft_error("Error\n", o->map);
+	if (o->height > MAX_HEIGHT|| o->width > MAX_WIDTH)
+		ft_error("Error map size\n",o->map);
 	imgs.mlx_win = mlx_new_window(imgs.mlx, o->width, o->height, "So_long");
 	if (!imgs.mlx_win)
 	{
+		mlx_destroy_window(imgs.mlx_win, imgs.mlx_win);
 		ft_error("Error\n", o->map);
 	}
 	find_right_image(&imgs, o);

@@ -6,7 +6,7 @@
 /*   By: mel-hadd <mel-hadd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 13:52:02 by mel-hadd          #+#    #+#             */
-/*   Updated: 2024/04/22 15:06:38 by mel-hadd         ###   ########.fr       */
+/*   Updated: 2024/04/22 22:06:47 by mel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,25 +32,25 @@ void	flood_fill(t_data *o, int x, int y)
 
 void	get_xy(t_data *o, t_pos *v)
 {
-	o->i = 0;
-	while (o->map[o->i])
+	v->i = 0;
+	while (o->map[v->i])
 	{
-		o->j = 0;
-		while (o->map[o->i][o->j])
+		v->j = 0;
+		while (o->map[v->i][v->j])
 		{
-			if (o->map[o->i][o->j] == 'P')
+			if (o->map[v->i][v->j] == 'P')
 			{
-				v->x_player = o->j;
-				v->y_player = o->i;
+				v->x_player = v->j;
+				v->y_player = v->i;
 			}
-			else if (o->map[o->i][o->j] == 'E')
+			else if (o->map[v->i][v->j] == 'E')
 			{
-				v->x_exit = o->j;
-				v->y_exit = o->i;
+				v->x_exit = v->j;
+				v->y_exit = v->i;
 			}
-			o->j++;
+			v->j++;
 		}
-		o->i++;
+		v->i++;
 	}
 }
 
@@ -62,7 +62,7 @@ void	check_valid_path(t_data *o, t_pos *v)
 		&& o->map_fill[v->y_exit][v->x_exit - 1] != 'V')
 	{
 		free_map(o->map_fill);
-		ft_error("Error Path not valid", o->map);
+		ft_error("Error Path not valid\n", o->map);
 	}
 	o->y = 0;
 	while (o->map_fill[o->y])

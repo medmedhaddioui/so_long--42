@@ -6,7 +6,7 @@
 /*   By: mel-hadd <mel-hadd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 12:13:35 by mel-hadd          #+#    #+#             */
-/*   Updated: 2024/04/22 14:47:24 by mel-hadd         ###   ########.fr       */
+/*   Updated: 2024/04/22 21:13:29 by mel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void	right_key(t_var *imgs, t_pos *v)
 	}
 	if (imgs->coin_nb == 0 && imgs->map2[v->y_player][v->x_player + 1] == 'E')
 	{
-		ft_putstr_fd("You Won !!", 1);
+		ft_putstr_fd("You Won !!\n", 1);
+		free_map(imgs->map2);
 		exit(0);
 	}
 }
@@ -52,7 +53,8 @@ void	left_key(t_var *imgs, t_pos *v)
 	}
 	if (imgs->coin_nb == 0 && imgs->map2[v->y_player][v->x_player - 1] == 'E')
 	{
-		ft_putstr_fd("You Won !!", 1);
+		ft_putstr_fd("You Won !!\n", 1);
+		free_map(imgs->map2);
 		exit(0);
 	}
 }
@@ -74,7 +76,8 @@ void	up_key(t_var *imgs, t_pos *v)
 	}
 	if (imgs->coin_nb == 0 && imgs->map2[v->y_player - 1][v->x_player] == 'E')
 	{
-		ft_putstr_fd("You Won !!", 1);
+		ft_putstr_fd("You Won !!\n", 1);
+		free_map(imgs->map2);
 		exit(0);
 	}
 }
@@ -96,7 +99,8 @@ void	down_key(t_var *imgs, t_pos *v)
 	}
 	if (imgs->coin_nb == 0 && imgs->map2[v->y_player + 1][v->x_player] == 'E')
 	{
-		ft_putstr_fd("You Won !!", 1);
+		ft_putstr_fd("You Won !!\n", 1);
+		free_map(imgs->map2);
 		exit(0);
 	}
 }
