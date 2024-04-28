@@ -6,7 +6,7 @@
 /*   By: mel-hadd <mel-hadd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 21:14:15 by mel-hadd          #+#    #+#             */
-/*   Updated: 2024/04/22 21:23:07 by mel-hadd         ###   ########.fr       */
+/*   Updated: 2024/04/25 15:57:12 by mel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		ft_exit("Error Map file not exist\n");
 	o.len = ft_strlen(av[1]) - 4;
+	if ((av[1][o.len] == '.' && av[1][o.len - 1] == '/'))
+		ft_exit("Error wrong file\n");
 	if (strncmp(&av[1][o.len], ".ber", 4))
 		ft_exit("Error wrong file\n");
 	o.fd = open(av[1], O_RDONLY, 0666);

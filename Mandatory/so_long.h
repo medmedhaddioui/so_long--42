@@ -6,7 +6,7 @@
 /*   By: mel-hadd <mel-hadd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 21:15:45 by mel-hadd          #+#    #+#             */
-/*   Updated: 2024/04/22 21:23:05 by mel-hadd         ###   ########.fr       */
+/*   Updated: 2024/04/27 12:05:20 by mel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 # define ESC 53
 # define MAX_WIDTH 2550
 # define MAX_HEIGHT 1400
-
 
 typedef struct m_data
 {
@@ -91,5 +90,10 @@ void		down_key(t_var *imgs, t_pos *v);
 void		get_player_exit_xy(t_var *imgs, t_pos *v);
 void		get_xy(t_data *o, t_pos *v);
 void		free_map(char **s);
+void		move_player_right(t_var *imgs, int y, int x);
+void		move_player_left(t_var *imgs, int y, int x);
+void		move_player_up(t_var *imgs, int y, int x);
+void		move_player_down(t_var *imgs, int y, int x);
+void		exit_game(t_var *imgs);
 
 #endif

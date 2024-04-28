@@ -6,7 +6,7 @@
 /*   By: mel-hadd <mel-hadd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 14:17:52 by mel-hadd          #+#    #+#             */
-/*   Updated: 2024/04/22 19:03:22 by mel-hadd         ###   ########.fr       */
+/*   Updated: 2024/04/24 20:59:40 by mel-hadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ void	ft_error(char *s, char **map)
 {
 	free_map(map);
 	ft_putstr_fd(s, 2);
-	exit(1);
+	exit(EXIT_FAILURE);
 }
 
 void	ft_exit(char *s)
 {
 	ft_putstr_fd(s, 2);
-	exit(1);
+	exit(EXIT_FAILURE);
 }
 
 void	read_from_file(t_data *o)
